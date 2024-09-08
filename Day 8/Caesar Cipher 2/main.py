@@ -20,15 +20,15 @@ def encrypt(original_text, shift_amount):
     print(f"Here is the encoded result: {cipher_text}")
 
 def decrypt(original_text, shift_amount):
-    cipher_text = ''
+    output_text = ''
     for letter in original_text:
         shifted_position = alphabet.index(letter) - shift_amount
         if shifted_position % len(alphabet) is not 0:
             shifted_position = shifted_position % len(alphabet) - len(alphabet)
-            cipher_text += alphabet[shifted_position]
+            output_text += alphabet[shifted_position]
         else:
-            cipher_text += alphabet[shifted_position]
-    print(f"Here is the decoded result: {cipher_text}")
+            output_text += alphabet[shifted_position]
+    print(f"Here is the decoded result: {output_text}")
 
 
 def caesar(direction_text):
