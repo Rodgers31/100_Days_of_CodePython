@@ -47,7 +47,6 @@ while play:
     score_count = compare(celeb1, celeb2, final_score)
     if type(score_count) == int and score_count > final_score:
         final_score = score_count
-        print(final_score)
     else:
         print(f"{celeb1['name']} has {celeb1['follower_count']} million followers")
         print(f"And {celeb2['name']} has {celeb2['follower_count']} million followers")
