@@ -9,13 +9,13 @@ def compare(celeb1, celeb2, final_score):
     if followers == 'a':
         if celeb1['follower_count'] > celeb2['follower_count']:
             final_score += 1
-            return final_score
+            return final_score, celeb1
         else:
             return print(f"Sorry, that's wrong. Final score: {final_score}")
     elif followers == 'b':
         if celeb2['follower_count'] > celeb1['follower_count']:
             final_score += 1
-            return final_score
+            return final_score, celeb2
         else:
             return print(f"Sorry, that's wrong. Final score: {final_score}")
     else:
@@ -24,6 +24,7 @@ def compare(celeb1, celeb2, final_score):
 
 play = True
 final_score = 0
+correct_celeb = {}
 print(logo)
 while play:
     celeb_rand = random.randint(0, len(data) - 1)
@@ -41,13 +42,18 @@ while play:
     celeb2 = (data[celeb2_rand])
     if final_score > 0:
         print(f"You're right! Current score: {final_score}")
+        celeb1 = correct_celeb
+
     print(f"Compare A: {celeb1['name']}, {celeb1['description']}, from {celeb1['country']}")
     print(vs)
     print(f"Against B: {celeb2['name']}, {celeb2['description']}, from {celeb2['country']}")
-    score_count = compare(celeb1, celeb2, final_score)
-    if type(score_count) == int and score_count > final_score:
-        final_score = score_count
-    else:
+    try:
+        score_count, celebrity = compare(celeb1, celeb2, final_score)
+        if type(score_count) == int and score_count > final_score:
+            final_score = score_count
+            correct_celeb = celebrity
+    except TypeError:
         print(f"{celeb1['name']} has {celeb1['follower_count']} million followers")
         print(f"And {celeb2['name']} has {celeb2['follower_count']} million followers")
         play = False
+
